@@ -1,4 +1,5 @@
 import type { WebApp } from '@twa-dev/types'
+import TelegramWebApp from '@twa-dev/sdk'
 
 type Theme = 'light' | 'dark'
 
@@ -18,8 +19,9 @@ export type TwaApi = {
 const isMock = import.meta.env.VITE_TG_MOCK === 'true'
 
 function createReal(): TwaApi {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const webApplication = (globalThis as any)?.Telegram?.WebApp as WebApp | undefined
+  const webApplication =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (TelegramWebApp ?? (globalThis as any)?.Telegram?.WebApp) as WebApp | undefined
 
   const theme = webApplication?.colorScheme === 'dark' ? 'dark' : 'light'
   const username = webApplication?.initDataUnsafe?.user?.username ?? null
