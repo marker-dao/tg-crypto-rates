@@ -1,5 +1,24 @@
-# Vue 3 + TypeScript + Vite
+# tg-crypto-rates
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+🚀 A Telegram Mini App for displaying cryptocurrency exchange rates.  
+Tech stack: [Vue 3](https://vuejs.org/) + [Vite](https://vitejs.dev/) + [Pinia](https://pinia.vuejs.org/) + [Vue Router](https://router.vuejs.org/) + [ofetch](https://github.com/unjs/ofetch) + [zod](https://zod.dev/).
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Getting Started
+
+```bash
+# clone the repository
+git clone git@github.com:username/tg-crypto-rates.git
+cd tg-crypto-rates
+
+# install dependencies
+pnpm install
+
+# start the dev server
+pnpm dev
+
+# build for production
+pnpm build
+
+# preview the production build
+pnpm preview
+```
