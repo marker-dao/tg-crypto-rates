@@ -1,7 +1,7 @@
 import type { WebApp as WebAppType } from '@twa-dev/types'
 import WebApp from '@twa-dev/sdk'
 
-type Theme = 'light' | 'dark'
+export type Theme = 'light' | 'dark'
 
 type HapticImpactStyle = 'light' | 'medium' | 'heavy'
 
