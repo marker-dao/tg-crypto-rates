@@ -1,26 +1,26 @@
 import { inject, provide } from 'vue'
-import { createTwa } from './twa'
-import type { TwaApi } from './twa'
+import { createWebApp } from './web-app'
+import type { WebAppAPI } from './web-app'
 
-const TwaKey = Symbol('Twa')
+const WebAppKey = Symbol('WebApp')
 
-export function provideTwa() {
-  const twa = createTwa()
+export function provideWebApp() {
+  const webApp = createWebApp()
 
-  provide(TwaKey, twa)
+  provide(WebAppKey, webApp)
 
-  twa.ready()
-  twa.expand()
+  webApp.ready()
+  webApp.expand()
 
-  return twa
+  return webApp
 }
 
-export function useTwa(): TwaApi {
-  const twa = inject<TwaApi>(TwaKey)
+export function useWebApp(): WebAppAPI {
+  const webApp = inject<WebAppAPI>(WebAppKey)
 
-  if (!twa) {
-    throw new Error('TWA is not provided')
+  if (!webApp) {
+    throw new Error('WebApp is not provided')
   }
 
-  return twa
+  return webApp
 }

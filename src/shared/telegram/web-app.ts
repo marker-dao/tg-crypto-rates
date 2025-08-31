@@ -5,7 +5,7 @@ type Theme = 'light' | 'dark'
 
 type HapticImpactStyle = 'light' | 'medium' | 'heavy'
 
-export type TwaApi = {
+export type WebAppAPI = {
   available: boolean
   webApp: WebAppType | null
   theme: Theme
@@ -18,11 +18,11 @@ export type TwaApi = {
 
 const isMock = import.meta.env.VITE_TG_MOCK === 'true'
 
-function createReal(): TwaApi {
+function createReal(): WebAppAPI {
   const theme = WebApp?.colorScheme === 'dark' ? 'dark' : 'light'
   const username = WebApp?.initDataUnsafe?.user?.username ?? null
 
-  const configuration: TwaApi = {
+  const configuration: WebAppAPI = {
     available: Boolean(WebApp),
     webApp: WebApp ?? null,
     theme,
@@ -56,11 +56,11 @@ function createReal(): TwaApi {
   return configuration
 }
 
-function createMock(): TwaApi {
+function createMock(): WebAppAPI {
   const theme = import.meta.env.VITE_TG_THEME ?? 'light'
   const username = import.meta.env.VITE_TG_USER_NAME ?? 'dev'
 
-  const configuration: TwaApi = {
+  const configuration: WebAppAPI = {
     available: true,
     webApp: null,
     theme,
@@ -82,7 +82,7 @@ function createMock(): TwaApi {
   return configuration
 }
 
-export function createTwa(): TwaApi {
+export function createWebApp(): WebAppAPI {
   if (isMock) {
     return createMock()
   } else {
