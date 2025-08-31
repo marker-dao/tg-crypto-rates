@@ -1,5 +1,5 @@
-import type { WebApp } from '@twa-dev/types'
-import TelegramWebApp from '@twa-dev/sdk'
+import type { WebApp as WebAppType } from '@twa-dev/types'
+import WebApp from '@twa-dev/sdk'
 
 type Theme = 'light' | 'dark'
 
@@ -7,7 +7,7 @@ type HapticImpactStyle = 'light' | 'medium' | 'heavy'
 
 export type TwaApi = {
   available: boolean
-  webApp: WebApp | null
+  webApp: WebAppType | null
   theme: Theme
   username: string | null
   ready: () => void
@@ -19,29 +19,25 @@ export type TwaApi = {
 const isMock = import.meta.env.VITE_TG_MOCK === 'true'
 
 function createReal(): TwaApi {
-  const webApplication =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (TelegramWebApp ?? (globalThis as any)?.Telegram?.WebApp) as WebApp | undefined
-
-  const theme = webApplication?.colorScheme === 'dark' ? 'dark' : 'light'
-  const username = webApplication?.initDataUnsafe?.user?.username ?? null
+  const theme = WebApp?.colorScheme === 'dark' ? 'dark' : 'light'
+  const username = WebApp?.initDataUnsafe?.user?.username ?? null
 
   const configuration: TwaApi = {
-    available: Boolean(webApplication),
-    webApp: webApplication ?? null,
+    available: Boolean(WebApp),
+    webApp: WebApp ?? null,
     theme,
     username,
     ready: () => {
-      webApplication?.ready()
+      WebApp?.ready()
     },
     expand: () => {
-      webApplication?.expand?.()
+      WebApp?.expand?.()
     },
     hapticImpact: (style = 'light') => {
-      webApplication?.HapticFeedback?.impactOccurred(style)
+      WebApp?.HapticFeedback?.impactOccurred(style)
     },
     showBackButton: (show, onClick) => {
-      const button = webApplication?.BackButton
+      const button = WebApp?.BackButton
 
       if (!button) {
         return
